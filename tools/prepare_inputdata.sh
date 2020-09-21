@@ -40,8 +40,12 @@ then
 
    echo $i
    echo ${plotlat[$i]} ${plotlon[$i]}
-   ./mknoocnmap.pl -centerpoint ${plotlat[i]},${plotlon[i]} -name ${plotname[i]} -dx 0.01 -dy 0.01
-   mv ~/ctsm/tools/mkmapgrids/*${plotname[i]}*.nc /cluster/shared/noresm/inputdata/share/scripgrids/fates_platform/${plotname[i]}/
+##### The following method does not work for regional case, as they assume land all over the place. We need a land-sea mask file for each regional setting. 
+#   ./mknoocnmap.pl -centerpoint ${plotlat[i]},${plotlon[i]} -name ${plotname[i]} -dx 0.01 -dy 0.01
+#   mv ~/ctsm/tools/mkmapgrids/*${plotname[i]}*.nc /cluster/shared/noresm/inputdata/share/scripgrids/fates_platform/${plotname[i]}/
+##### Alternatively, the following scripts are provided, if you have domain setting and land-sea mask files as a netcdf file already, in tools folder.
+prepare_scriptgrid_fenno.ncl
+prepare_scriptgrid_fenno_ocean.ncl
 
 fi
 
@@ -57,10 +61,16 @@ then
    #../../../configure --macros-format Makefile --mpilib mpi-serial --machine saga
    #. ./.env_mach_specific.sh ; gmake
 
+   #### For regional case, the mapping file between land and ocean needs to be created before gen_domain, for instance:
+   /cluster/software/VERSIONS/esmf/6_3_0rp1/bin/binO/Linux.intel.64.openmpi.default/ESMF_RegridWeightGen --ignore_unmapped -s SCRIPgrid_Fenno_ocean_mask.nc -d SCRIPgrid_Fenno_nomask.nc -m conserve -w map_5x5_km_ocean_to_land_nomask_aave_da_c181115.nc --dst_regional --src_regional --src_type SCRIP --dst_type SCRIP
+
    #### Run
    . ./src/.env_mach_specific.sh
    ./gen_domain -m /cluster/shared/noresm/inputdata/share/scripgrids/fates_platform/${plotname[i]}/map_${plotname[i]}_noocean_to_${plotname[i]}_nomask_aave_da_${date}.nc -o ${plotname[i]} -l ${plotname[i]}
 
+
+
+   #####Three domain files will be created, land domain file or land-ocean domain file should be used ? 
    mv domain.lnd.${plotname[i]}_${plotname[i]}.${date}.nc domain.lnd.${plotname[i]}.${date}.nc
    mv domain*${plotname[i]}*.nc /cluster/shared/noresm/inputdata/share/domains/fates_platform/${plotname[i]}/
 
@@ -79,6 +89,15 @@ then
    mv map*${plotname[i]}*.nc /cluster/shared/noresm/inputdata/lnd/clm2/mappingdata/maps/fates_platform/${plotname[i]}/
 
 fi
+
+####### Create mapping file between regional land domain and rof domain:
+# need to load the ESMF module, and find the correct place of ESMF
+# is "conserve" interpolation good for run off?
+# need a high resolution runoff script grid, if you need accurate runoff simulation
+
+/cluster/software/VERSIONS/esmf/6_3_0rp1/bin/binO/Linux.intel.64.openmpi.default/ESMF_RegridWeightGen --ignore_unmapped -s SCRIPgrid_0.5x0.5_nomask_c110308.nc -d SCRIPgrid_Fenno_nomask.nc -m conserve -w map_0.5x0.5_nomask_to_5x5_km_nomask_aave_da_c181115.nc --dst_regional --src_type SCRIP --dst_type SCRIP
+/cluster/software/VERSIONS/esmf/6_3_0rp1/bin/binO/Linux.intel.64.openmpi.default/ESMF_RegridWeightGen --ignore_unmapped -s SCRIPgrid_Fenno_nomask.nc -d SCRIPgrid_0.5x0.5_nomask_c110308.nc -m conserve -w map_5x5_km_nomask_to_0.5x0.5_nomask_aave_da_c181115.nc --src_regional --src_type SCRIP --dst_type SCRIP
+
 
 ######## Make surface data file:
 if [ ${creat_surfdat} == "T" ]
