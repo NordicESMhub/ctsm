@@ -8,22 +8,11 @@
 
 date="200605"         # Need to be the same as the running date
 
-######### SeedClim Sites
-#plotlat=(61.0243 60.8231 60.8328 60.9335 60.8203 60.8760 61.0866 60.5445 61.0355 60.8803 60.6652 60.6901)
-#plotlon=(8.12343 7.27596 7.17561 6.41504 8.70466 7.17666 6.63028 6.51468 9.07876 7.16982 6.33738 5.96487)
-#plotname=(ALP1 ALP2 ALP3 ALP4 SUB1 SUB2 SUB3 SUB4 BOR1 BOR2 BOR3 BOR4)
+######### Domain have been set:
+Hui Tang: Nordic: 0.05x0.05, 57.37525-71.32475 N, 4.625247-31.62475 E
+Yeliz:
+Marius:
 
-######### Landpress Sites
-#plotlat=(60.70084 65.83677 64.779 65.79602)
-#plotlon=(5.092566 12.224506 11.2193 12.219299)
-#plotname=(LYG BUO HAV SKO)
-
-######### Three-D Sites
-#plotlat=(60.88019 60.86183 60.85994)
-#plotlon=(7.16990 7.16800 7.19504)
-#plotname=(VIKE JOAS LIAH)
-
-######### Finnmark Site
 plotlat=(69.341088)
 plotlon=(25.293524)
 plotname=(FINN)
