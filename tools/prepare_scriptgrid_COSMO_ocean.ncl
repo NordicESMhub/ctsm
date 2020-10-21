@@ -24,7 +24,7 @@ begin
 
    lat          = f1->RLAT(645:814,435:565)
    lon          = f1->RLON(645:814,435:565)
-   landsea      = tointeger(f1->FR_LAND(645:814,435:565))
+   landsea      = tointeger(f1->FR_LAND(645:814,435:565))     ; for more accurate land-sea mask using cosmo data, >0.5 should be used for defining land.
    landsea      = 1
 
 

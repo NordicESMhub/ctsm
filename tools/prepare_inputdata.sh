@@ -96,7 +96,12 @@ fi
 # need a high resolution runoff script grid, if you need accurate runoff simulation
 
 /cluster/software/VERSIONS/esmf/6_3_0rp1/bin/binO/Linux.intel.64.openmpi.default/ESMF_RegridWeightGen --ignore_unmapped -s SCRIPgrid_0.5x0.5_nomask_c110308.nc -d SCRIPgrid_Fenno_nomask.nc -m conserve -w map_0.5x0.5_nomask_to_5x5_km_nomask_aave_da_c181115.nc --dst_regional --src_type SCRIP --dst_type SCRIP
-/cluster/software/VERSIONS/esmf/6_3_0rp1/bin/binO/Linux.intel.64.openmpi.default/ESMF_RegridWeightGen --ignore_unmapped -s SCRIPgrid_Fenno_nomask.nc -d SCRIPgrid_0.5x0.5_nomask_c110308.nc -m conserve -w map_5x5_km_nomask_to_0.5x0.5_nomask_aave_da_c181115.nc --src_regional --src_type SCRIP --dst_type SCRIP
+#/cluster/software/VERSIONS/esmf/6_3_0rp1/bin/binO/Linux.intel.64.openmpi.default/ESMF_RegridWeightGen --ignore_unmapped -s SCRIPgrid_Fenno_nomask.nc -d SCRIPgrid_0.5x0.5_nomask_c110308.nc -m conserve -w map_5x5_km_nomask_to_0.5x0.5_nomask_aave_da_c181115.nc --src_regional --src_type SCRIP --dst_type SCRIP
+
+# If you turn on run off, using MOSART with 8th degree, addition runoff mapping file is needed for routing data:
+
+# Need to create addition script grid file for the routing data
+# Then create mapping file from MOZART grid to the regional domain
 
 
 ######## Make surface data file:
