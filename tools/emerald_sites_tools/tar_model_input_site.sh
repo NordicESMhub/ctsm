@@ -6,13 +6,13 @@
 
 date="200927"         # DATE when the domain files were created.
 
-plotname=(VIKE JOAS LIAH)    # Plot name
+plotname=(LYG BUO HAV SKO)    # Plot name
 #SeedClim Sites: ALP1 ALP2 ALP3 ALP4 SUB1 SUB2 SUB3 SUB4 BOR1 BOR2 BOR3 BOR4
 #Landpress Sites: LYG BUO HAV SKO
 #Three-D Sites: VIKE JOAS LIAH
 #Finnmark Site: FINN
 
-site_num="0 1 2"      #0 1 2 3 4 5 6 7 8 9 10 11
+site_num="0 1 2 3"      #0 1 2 3 4 5 6 7 8 9 10 11
 
 atm_forc="GSWP3v1"    #GSWP3v1, COSMO6km (not ready yet), ERA5land (not ready yet)
 

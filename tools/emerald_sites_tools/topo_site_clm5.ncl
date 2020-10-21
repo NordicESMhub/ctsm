@@ -10,19 +10,19 @@ begin
 ;################
 ;Setup begin
 ;################
-   plot_name=(/"VIKE","JOAS","LIAH"/)          ; site name
-   plot_height=(/469,920,1290/)                ; site elevation (m)
+   plot_name=(/"LYG","BUO","HAV","SKO"/)          ; site name
+   plot_height=(/15,7,9,10/)                ; site elevation (m)
 
 ;SeedClim Sites: "ALP1","ALP2","ALP3","ALP4","SUB1","SUB2","SUB3","SUB4","BOR1","BOR2","BOR3","BOR4"
 ;        Height: 1208,1097,1213,1088,815,700,769,797,589,474,431,346
 ;Landpress Sites: "LYG","BUO","HAV","SKO"
-;         Height:
+;        Height: 15, 7, 9, 10
 ;Three-D Sites: "VIKE","JOAS","LIAH"
-;       Height: 469,920,1290
+;        Height: 469,920,1290
 ;Finnmark Site: "FINN"
-;        Height:
+;        Height: 352 
  
-  do p=0,2,1
+  do p=0,3,1
  
     filename    = "/cluster/shared/noresm/inputdata/atm/datm7/topo_forcing/topodata_0.9x1.25_USGS_070110_stream_c151201.nc"         ; global file for a template of the netcdf file
     filenameout = "/cluster/shared/noresm/inputdata_fates_platform/atm/datm7/topo_forcing/topodata_"+plot_name(p)+".nc"             ; output topography file for the site
